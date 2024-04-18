@@ -9,9 +9,12 @@ import SwiftUI
 
 @main
 struct AI_Prompt_GeneratorApp: App {
+    
+    var prompt = Prompt()
+    
     var body: some Scene {
         WindowGroup {
-            ContentView()
+            ContentView().environmentObject(prompt)
         }
     }
 }
