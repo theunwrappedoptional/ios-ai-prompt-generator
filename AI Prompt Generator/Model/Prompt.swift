@@ -20,6 +20,26 @@ final class Prompt: ObservableObject {
     @Published var specificInput = ""
     @Published var inputRequisites = ""
     
+    @Published var personas: [Attribute] = [
+        Attribute(name: "Lawyer"),
+        Attribute(name: "Social Media Manager"),
+        Attribute(name: "Financial Advisor"),
+        Attribute(name: "Real Estate Consultant"),
+        Attribute(name: "IT Manager"),
+        Attribute(name: "Privacy Expert"),
+        Attribute(name: "Copywriter"),
+        Attribute(name: "Teacher"),
+        Attribute(name: "Mechanichal Engineer")
+    ]
+    
+    @Published var voice: [Attribute] = [
+        Attribute(name: "Formal"),
+        Attribute(name: "Informa"),
+        Attribute(name: "Neutral"),
+        Attribute(name: "Tech"),
+        Attribute(name: "Literate"),
+        Attribute(name: "Conversational"),
+    ]
     
     func check(_ element: String, with title: String) -> String {
         
@@ -31,6 +51,21 @@ final class Prompt: ObservableObject {
         ### \(title)
         \(element)
         """
+    }
+    
+    func check(_ attributes: [Attribute]) -> String {
+        
+        
+//        guard element != "" else{
+//            return ""
+//        }
+//        
+//        return """
+//        ### \(title)
+//        \(element)
+//        """
+        
+        return "attributes"
     }
     
     func generatePrompt() -> String {
