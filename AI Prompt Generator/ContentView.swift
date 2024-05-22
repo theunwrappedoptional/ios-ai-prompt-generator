@@ -36,18 +36,20 @@ struct ContentView: View {
                     TextField("Specifies size, length and other details.", text: $prompt.inputRequisites, axis: .vertical)
                         .lineLimit(5, reservesSpace: true)
                 }
+            
                 
-                Section(footer: Text("Select the professions, maximum two, that the system will represent when generating the prompt.")) {
-                    NavigationLink(destination: ToggleAttributesView(title: "Persona", attributes: $prompt.personas)) {
-                        Text("Persona")
+                // Section for "Personas"
+                Section(footer: Text("\(prompt.personas.description)")) {
+                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.personas)) {
+                        Text("\(prompt.personas.title)")
                     }
                 }
                 
-                Section(footer: Text("Choose the most appropriate tone of voice for the target audience. You can select a maximum of three options.")){
-                    NavigationLink(destination: ToggleAttributesView(title: "Voice tone", attributes: $prompt.voice)) {
-                        Text("Voice tone")
-                    }
-                }
+//                Section(footer: Text("Choose the most appropriate tone of voice for the target audience. You can select a maximum of three options.")){
+//                    NavigationLink(destination: ToggleAttributesView(title: "Voice tone", numberOfAllowedAttributes: 3, attributes: $prompt.voice)) {
+//                        Text("Voice tone")
+//                    }
+//                }
                 
                 Section(footer: Text("Choose the writing style most suited to your target audience. Maximum three options.")){
                     NavigationLink(destination: TestView()) {

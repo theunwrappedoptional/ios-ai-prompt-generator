@@ -20,17 +20,23 @@ final class Prompt: ObservableObject {
     @Published var specificInput = ""
     @Published var inputRequisites = ""
     
-    @Published var personas: [Attribute] = [
-        Attribute(name: "Lawyer"),
-        Attribute(name: "Social Media Manager"),
-        Attribute(name: "Financial Advisor"),
-        Attribute(name: "Real Estate Consultant"),
-        Attribute(name: "IT Manager"),
-        Attribute(name: "Privacy Expert"),
-        Attribute(name: "Copywriter"),
-        Attribute(name: "Teacher"),
-        Attribute(name: "Mechanichal Engineer")
-    ]
+    @Published var personas: AttributeSet = AttributeSet(
+        title: "Personas",
+        description: "Select the professions, maximum two, that the system will represent when generating the prompt.",
+        numberOfAllowedAttributes: 2,
+        list: [
+            Attribute(name: "Lawyer"),
+            Attribute(name: "Social Media Manager"),
+            Attribute(name: "Financial Advisor"),
+            Attribute(name: "Real Estate Consultant"),
+            Attribute(name: "IT Manager"),
+            Attribute(name: "Privacy Expert"),
+            Attribute(name: "Copywriter"),
+            Attribute(name: "Teacher"),
+            Attribute(name: "Mechanichal Engineer")
+        ],
+        intro: "You must act as: "
+    )
     
     @Published var voice: [Attribute] = [
         Attribute(name: "Formal"),
