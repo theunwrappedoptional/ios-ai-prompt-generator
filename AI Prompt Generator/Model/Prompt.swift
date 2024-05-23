@@ -9,6 +9,8 @@ import Foundation
 
 final class Prompt: ObservableObject {
     
+    //TODO: Fix the full prompt generation
+    
     let intro: String = """
     Hello AI, I need your help.
     Below you will find all the necessary details, each instruction is defined by three ### hashtags.
@@ -19,6 +21,8 @@ final class Prompt: ObservableObject {
     @Published var context: String = ""
     @Published var specificInput = ""
     @Published var inputRequisites = ""
+    @Published var limitations = ""
+    @Published var successCriteria = ""
     
     @Published var personas: AttributeSet = AttributeSet(
         title: "Personas",
@@ -38,14 +42,55 @@ final class Prompt: ObservableObject {
         intro: "You must act as: "
     )
     
-    @Published var voice: [Attribute] = [
-        Attribute(name: "Formal"),
-        Attribute(name: "Informa"),
-        Attribute(name: "Neutral"),
-        Attribute(name: "Tech"),
-        Attribute(name: "Literate"),
-        Attribute(name: "Conversational"),
-    ]
+    @Published var voiceTone: AttributeSet = AttributeSet(
+        title: "VoiceTone",
+        description: "Choose the most appropriate tone of voice for the target audience. You can select a maximum of three options.",
+        numberOfAllowedAttributes: 3,
+        list: [
+            Attribute(name: "Formal"),
+            Attribute(name: "Informal"),
+            Attribute(name: "Neutral"),
+            Attribute(name: "Tech"),
+            Attribute(name: "Literate"),
+            Attribute(name: "Conversational")
+        ],
+        intro: "The voice tone must be: "
+    )
+    
+    @Published var writingStyle: AttributeSet = AttributeSet(
+        title: "Writing Style",
+        description: "Choose the writing style most suited to your target audience. Maximum three options.",
+        numberOfAllowedAttributes: 3,
+        list: [
+            Attribute(name: "Informaitve"),
+            Attribute(name: "Instructive"),
+            Attribute(name: "Argomentative"),
+            Attribute(name: "Descriptive"),
+            Attribute(name: "Expositive"),
+            Attribute(name: "Legal"),
+            Attribute(name: "Technical"),
+            Attribute(name: "Persuasive"),
+            Attribute(name: "Conversational"),
+            Attribute(name: "Humoristic")
+        ],
+        intro: "The selected writing style is: "
+    )
+    
+    @Published var targetAudience: AttributeSet = AttributeSet(
+        title: "Target Audicence",
+        description: "Choose your primary target audience. You can select a maximum of three options.",
+        numberOfAllowedAttributes: 3,
+        list: [
+            Attribute(name: "Private Clients"),
+            Attribute(name: "Companies and corparations"),
+            Attribute(name: "Lawyers"),
+            Attribute(name: "Financial institutions"),
+            Attribute(name: "Government institutions"),
+            Attribute(name: "ONG"),
+            Attribute(name: "Genral public")
+        ],
+        intro: "You must talk to: "
+    )
     
     func check(_ element: String, with title: String) -> String {
         
@@ -59,19 +104,31 @@ final class Prompt: ObservableObject {
         """
     }
     
-    func check(_ attributes: [Attribute]) -> String {
+    func checkAttributes() -> String {
         
+        var att = ""
         
-//        guard element != "" else{
-//            return ""
-//        }
-//        
-//        return """
-//        ### \(title)
-//        \(element)
-//        """
+        if !personas.listOfActive.isEmpty {
+            att.append(personas.listOfActiveDescription())
+            att.append("\n")
+        }
         
-        return "attributes"
+        if !voiceTone.listOfActive.isEmpty {
+            att.append(voiceTone.listOfActiveDescription())
+            att.append("\n")
+        }
+        
+        if !writingStyle.listOfActive.isEmpty {
+            att.append(writingStyle.listOfActiveDescription())
+            att.append("\n")
+        }
+        
+        if !targetAudience.listOfActive.isEmpty {
+            att.append(targetAudience.listOfActiveDescription())
+            att.append("\n")
+        }
+        
+        return att
     }
     
     func generatePrompt() -> String {
@@ -81,6 +138,8 @@ final class Prompt: ObservableObject {
         \(check(context, with: "Context"))
         \(check(specificInput, with: "Specific Input"))
         \(check(inputRequisites, with: "Output Requisites"))
+        \(check(inputRequisites, with: "Output Requisites"))
+        \(checkAttributes())
         """
     }
 }

@@ -38,54 +38,58 @@ struct ContentView: View {
                 }
             
                 
-                // Section for "Personas"
+                // Section "Personas"
                 Section(footer: Text("\(prompt.personas.description)")) {
                     NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.personas)) {
                         Text("\(prompt.personas.title)")
                     }
                 }
                 
-//                Section(footer: Text("Choose the most appropriate tone of voice for the target audience. You can select a maximum of three options.")){
-//                    NavigationLink(destination: ToggleAttributesView(title: "Voice tone", numberOfAllowedAttributes: 3, attributes: $prompt.voice)) {
-//                        Text("Voice tone")
-//                    }
-//                }
-                
-                Section(footer: Text("Choose the writing style most suited to your target audience. Maximum three options.")){
-                    NavigationLink(destination: TestView()) {
-                        Text("Linguistic register")
+                //Section "Voice tone"
+                Section(footer: Text("\(prompt.voiceTone.description)")) {
+                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.voiceTone)) {
+                        Text("\(prompt.voiceTone.title)")
                     }
                 }
                 
-                Section(footer: Text("Choose the writing style most suited to your target audience. Maximum three options.")){
-                    NavigationLink(destination: TestView()) {
-                        Text("Writing style")
+                //Section "Writing Style"
+                Section(footer: Text("\(prompt.writingStyle.description)")) {
+                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.writingStyle)) {
+                        Text("\(prompt.writingStyle.title)")
                     }
                 }
                 
-                Section(footer: Text("Choose your primary target audience. You can select a maximum of three options.")){
-                    NavigationLink(destination: TestView()) {
-                        Text("Target")
+                //Section "Target Audience"
+                
+                Section(footer: Text("\(prompt.targetAudience.description)")) {
+                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.targetAudience)) {
+                        Text("\(prompt.targetAudience.title)")
                     }
                 }
                 
                 Section(header: Text("###Limitations and constraints")){
-                    TextField("Enter any legal, ethical or privacy restrictions that you must abide by.", text: $prompt.inputRequisites, axis: .vertical)
+                    TextField("Enter any legal, ethical or privacy restrictions that you must abide by.", text: $prompt.limitations, axis: .vertical)
                         .lineLimit(5, reservesSpace: true)
                 }
                 
                 Section(header: Text("### Success Criteria")){
-                    TextField("Describe the criteria that will determine the effectiveness of the provided response.", text: $prompt.inputRequisites, axis: .vertical)
+                    TextField("Describe the criteria that will determine the effectiveness of the provided response.", text: $prompt.successCriteria, axis: .vertical)
                         .lineLimit(5, reservesSpace: true)
                 }
                 
                 // TODO: Stylize the button
                 
-                Button {
-                    print(prompt.generatePrompt())
-                } label: {
-                    HStack{
-                        Text("GENERATE THE PROMPT")
+//                Button {
+//                    print(prompt.generatePrompt())
+//                } label: {
+//                    HStack{
+//                        Text("GENERATE THE PROMPT")
+//                    }
+//                }
+                
+                Section() {
+                    NavigationLink(destination: FullPromptView(fullPrompt: prompt.generatePrompt())) {
+                        Text("SEE THE FULL PROMPT")
                     }
                 }
                 .disabled(prompt.task == "")

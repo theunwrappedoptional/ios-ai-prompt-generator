@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		543841402BFF5A4C001385EB /* FullPromptView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5438413F2BFF5A4C001385EB /* FullPromptView.swift */; };
 		5486B3182BD154CD00883D10 /* AI_Prompt_GeneratorApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5486B3172BD154CD00883D10 /* AI_Prompt_GeneratorApp.swift */; };
 		5486B31A2BD154CD00883D10 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5486B3192BD154CD00883D10 /* ContentView.swift */; };
 		5486B31C2BD154D100883D10 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 5486B31B2BD154D100883D10 /* Assets.xcassets */; };
@@ -18,6 +19,7 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		5438413F2BFF5A4C001385EB /* FullPromptView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FullPromptView.swift; sourceTree = "<group>"; };
 		5486B3142BD154CD00883D10 /* AI Prompt Generator.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "AI Prompt Generator.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		5486B3172BD154CD00883D10 /* AI_Prompt_GeneratorApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AI_Prompt_GeneratorApp.swift; sourceTree = "<group>"; };
 		5486B3192BD154CD00883D10 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
@@ -62,6 +64,7 @@
 				5486B3252BD1580800883D10 /* Model */,
 				5486B3172BD154CD00883D10 /* AI_Prompt_GeneratorApp.swift */,
 				5486B3192BD154CD00883D10 /* ContentView.swift */,
+				5438413F2BFF5A4C001385EB /* FullPromptView.swift */,
 				54BDE7C52BFB447200E82BAD /* TestView.swift */,
 				54BDE7C72BFB53AF00E82BAD /* ToggleAttributesView.swift */,
 				5486B31B2BD154D100883D10 /* Assets.xcassets */,
@@ -162,6 +165,7 @@
 				5486B31A2BD154CD00883D10 /* ContentView.swift in Sources */,
 				5486B3272BD1581900883D10 /* Prompt.swift in Sources */,
 				5486B3182BD154CD00883D10 /* AI_Prompt_GeneratorApp.swift in Sources */,
+				543841402BFF5A4C001385EB /* FullPromptView.swift in Sources */,
 				54BDE7C82BFB53AF00E82BAD /* ToggleAttributesView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
