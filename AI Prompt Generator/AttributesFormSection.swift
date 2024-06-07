@@ -8,11 +8,25 @@
 import SwiftUI
 
 struct AttributesFormSection: View {
+    
+    @Binding var set:AttributeSet
+    
     var body: some View {
-        Text(/*@START_MENU_TOKEN@*/"Hello, World!"/*@END_MENU_TOKEN@*/)
+        Section(footer:
+            VStack(alignment: .leading){
+                Text(set.description)
+                if set.listOfActive.count != 0 {
+                    Text(set.listOfActiveDescriptionInForm())
+                    .foregroundStyle(.black)
+                }
+            }) {
+            NavigationLink(destination: ToggleAttributesView(attributesSet: $set)) {
+                Text("\(set.title)")
+            }
+        }
     }
 }
 
-#Preview {
-    AttributesFormSection()
-}
+//#Preview {
+//    AttributesFormSection()
+//}

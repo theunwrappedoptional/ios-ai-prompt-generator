@@ -11,9 +11,7 @@ struct ContentView: View {
     
     @EnvironmentObject var prompt: Prompt
     var customFont = Font.system(.body)
-    
-    @State var placeholderString = "###"
-    
+        
     var body: some View {
         NavigationStack{
             Form{
@@ -36,36 +34,18 @@ struct ContentView: View {
                     TextField("Specifies size, length and other details.", text: $prompt.inputRequisites, axis: .vertical)
                         .lineLimit(5, reservesSpace: true)
                 }
-            
                 
                 // Section "Personas"
-                Section(footer: Text("\(prompt.personas.description)")) {
-                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.personas)) {
-                        Text("\(prompt.personas.title)")
-                    }
-                }
+                AttributesFormSection(set: $prompt.attributesSets.personas)
                 
                 //Section "Voice tone"
-                Section(footer: Text("\(prompt.voiceTone.description)")) {
-                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.voiceTone)) {
-                        Text("\(prompt.voiceTone.title)")
-                    }
-                }
+                AttributesFormSection(set: $prompt.attributesSets.voiceTone)
                 
                 //Section "Writing Style"
-                Section(footer: Text("\(prompt.writingStyle.description)")) {
-                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.writingStyle)) {
-                        Text("\(prompt.writingStyle.title)")
-                    }
-                }
-                
+                AttributesFormSection(set: $prompt.attributesSets.writingStyle)
+               
                 //Section "Target Audience"
-                
-                Section(footer: Text("\(prompt.targetAudience.description)")) {
-                    NavigationLink(destination: ToggleAttributesView(attributeSet: $prompt.targetAudience)) {
-                        Text("\(prompt.targetAudience.title)")
-                    }
-                }
+                AttributesFormSection(set: $prompt.attributesSets.targetAudience)
                 
                 Section(header: Text("###Limitations and constraints")){
                     TextField("Enter any legal, ethical or privacy restrictions that you must abide by.", text: $prompt.limitations, axis: .vertical)
@@ -79,21 +59,12 @@ struct ContentView: View {
                 
                 // TODO: Stylize the button
                 
-//                Button {
-//                    print(prompt.generatePrompt())
-//                } label: {
-//                    HStack{
-//                        Text("GENERATE THE PROMPT")
-//                    }
-//                }
-                
                 Section() {
                     NavigationLink(destination: FullPromptView(fullPrompt: prompt.generatePrompt())) {
                         Text("SEE THE FULL PROMPT")
                     }
                 }
                 .disabled(prompt.task == "")
-//               .buttonStyle(.bordered)
             }
             .navigationTitle("✎ Prompt generator")
         }

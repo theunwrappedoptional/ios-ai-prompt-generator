@@ -9,24 +9,27 @@ import SwiftUI
 
 struct ToggleAttributesView: View {
     
+    // TODO: Verify Toolbar button
+    // TODO: "Add attribute" option???
+    
     @State var promptPreview = ""
     @State var disabled = false
-    @Binding var attributeSet: AttributeSet
+    @Binding var attributesSet: AttributeSet
     
     var body: some View {
         
         NavigationStack{
             Form{
-                
                 Section(content: {
-                    List($attributeSet.list) { $persona in
+                    List($attributesSet.list) { $persona in
                         Toggle(isOn: $persona.isActive, label: {
                             Text("\(persona.name)")
                         })
                         .disabled(persona.isActive ? false : disabled)
                     }
                 }, header: {
-                    Text(attributeSet.description)
+                    Text(attributesSet.description)
+                        .minimumScaleFactor(0.5)
                 }, footer: {
                     HStack(alignment: .center){
                         Spacer()
@@ -34,7 +37,7 @@ struct ToggleAttributesView: View {
                             .foregroundStyle(.red)
                         Spacer()
                     }
-                    .opacity(attributeSet.listOfActive.count == attributeSet.numberOfAllowedAttributes ? 1 : 0)
+                    .opacity(attributesSet.listOfActive.count == attributesSet.numberOfAllowedAttributes ? 1 : 0)
                 })
                 .textCase(nil)
                 
@@ -42,21 +45,23 @@ struct ToggleAttributesView: View {
                     Text(promptPreview)
                 }
             }
-            .navigationTitle(attributeSet.title)
+            .navigationTitle(attributesSet.title)
         }
-        .onChange(of: attributeSet.list) { _, _ in
-            if attributeSet.listOfActive.count >= attributeSet.numberOfAllowedAttributes {
+        .onChange(of: attributesSet.list) { _, _ in
+            if attributesSet.listOfActive.count >= attributesSet.numberOfAllowedAttributes {
                 disabled = true
             } else {
                 disabled = false
             }
-            
-            promptPreview = attributeSet.listOfActiveDescription()
+            promptPreview = attributesSet.listOfActiveDescription()
+        }
+        .onAppear(){
+            promptPreview = attributesSet.listOfActiveDescription()
         }
     }
 }
 
 #Preview {
     
-    ToggleAttributesView(attributeSet: .constant(Prompt().personas))
+    ToggleAttributesView(attributesSet: .constant(Prompt().attributesSets.personas))
 }

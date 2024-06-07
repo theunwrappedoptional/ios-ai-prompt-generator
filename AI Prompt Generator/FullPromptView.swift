@@ -10,12 +10,18 @@ import SwiftUI
 struct FullPromptView: View {
     
     //TODO: Complete the body layout
+    //TODO: Create "Copy Prompt" button
     
     var fullPrompt: String
     
     var body: some View {
         NavigationStack{
-            Text(fullPrompt)
+            ScrollView {
+                Text(fullPrompt)
+                    .textSelection(.enabled)
+            }
+            .padding()
+            
         }
         
     }
